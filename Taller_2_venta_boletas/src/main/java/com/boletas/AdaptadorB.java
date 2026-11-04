@@ -1,4 +1,4 @@
-package com.boletas;
+ package com.boletas;
 
 public class AdaptadorB implements Pago {
 
