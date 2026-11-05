@@ -222,6 +222,8 @@ Tabla de Trazabilidad:
 
   Archivos: Main.java
 
+  Clases: Main
+
 
 Justificacion SOLID:
 
