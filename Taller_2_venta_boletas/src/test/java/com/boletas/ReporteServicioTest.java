@@ -25,7 +25,7 @@ public class ReporteServicioTest {
         for (int i = 1; i <= sillasLibres; i++) {
             localidad1.agregar(new Silla(sillasVendidas + i));
         }
-        Zona zona1 = new Zona("Oriental");
+        Zona zona1 = new Zona("Zona 1");
         zona1.agregar(localidad1);
         Escenario escenario1 = new Escenario("Estadio");
         escenario1.agregar(zona1);
@@ -34,9 +34,9 @@ public class ReporteServicioTest {
 
     @BeforeEach
     public void preparar() {
-        concierto1 = new Concierto("Rock", LocalDateTime.now().plusDays(10), crearEscenario(3, 5, 100), false, 0, "Banda");
-        partido1 = new Partido("Clasico", LocalDateTime.now().plusDays(3), crearEscenario(1, 3, 100), false, 0, "A vs B");
-        obra1 = new ObraTeatro("Hamlet", LocalDateTime.now().minusDays(1), new Escenario("Vacio"), false, 0, "Juan");
+        concierto1 = new Concierto("Concierto de Rock", LocalDateTime.now().plusDays(10), crearEscenario(3, 5, 100), false, 0, "Banda");
+        partido1 = new Partido("Partido de Futbol", LocalDateTime.now().plusDays(3), crearEscenario(1, 3, 100), false, 0, "Equipo A vs Equipo B");
+        obra1 = new ObraTeatro("Obra de Teatro", LocalDateTime.now().minusDays(1), new Escenario("Vacio"), false, 0, "Director");
 
         Registro<Evento> eventos = new RegistroLista<>();
         eventos.agregar(concierto1);
@@ -80,20 +80,20 @@ public class ReporteServicioTest {
         List<Evento> calendario = reporte1.calendario();
 
         assertEquals(2, calendario.size());
-        assertEquals("Clasico", calendario.get(0).getNombre());
+        assertEquals("Partido de Futbol", calendario.get(0).getNombre());
     }
 
     @Test
     public void buscarEventoEncuentraPorNombre() {
-        assertTrue(reporte1.buscarEvento("Rock").isPresent());
-        assertFalse(reporte1.buscarEvento("Festival").isPresent());
+        assertTrue(reporte1.buscarEvento("Concierto de Rock").isPresent());
+        assertFalse(reporte1.buscarEvento("Evento inexistente").isPresent());
     }
 
     @Test
     public void eventosPorTipoYNombreUsaElComparadorCompuesto() {
         List<Evento> eventos = reporte1.eventosPorTipoYNombre();
 
-        assertEquals("Clasico", eventos.get(0).getNombre());
-        assertEquals("Rock", eventos.get(2).getNombre());
+        assertEquals("Partido de Futbol", eventos.get(0).getNombre());
+        assertEquals("Concierto de Rock", eventos.get(2).getNombre());
     }
 }

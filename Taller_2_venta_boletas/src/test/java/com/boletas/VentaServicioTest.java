@@ -14,11 +14,11 @@ public class VentaServicioTest {
     private Concierto concierto1;
 
     private Concierto crearConcierto(boolean en_preventa, int horas) {
-        Zona zona1 = new Zona("Oriental");
+        Zona zona1 = new Zona("Zona 1");
         zona1.agregar(localidad1);
         Escenario escenario1 = new Escenario("Estadio");
         escenario1.agregar(zona1);
-        return new Concierto("Rock", LocalDateTime.now().plusHours(horas), escenario1, en_preventa, 0.2, "Banda");
+        return new Concierto("Concierto de Rock", LocalDateTime.now().plusHours(horas), escenario1, en_preventa, 0.2, "Banda");
     }
 
     private Silla silla(int posicion) {
@@ -28,7 +28,7 @@ public class VentaServicioTest {
     @BeforeEach
     public void preparar() {
         venta1 = new VentaServicio(new AdaptadorA(new ProveedorA()));
-        cliente1 = new Cliente("Ana", "111");
+        cliente1 = new Cliente("Cliente 1", "111");
         localidad1 = new Localidad("VIP", 100);
         for (int i = 1; i <= 6; i++) {
             localidad1.agregar(new Silla(i));
@@ -57,7 +57,7 @@ public class VentaServicioTest {
     @Test
     public void noSePuedeVenderUnaSillaOcupada() throws BoletasException {
         venta1.vender(cliente1, concierto1, localidad1, silla(0));
-        Cliente cliente2 = new Cliente("Beto", "222");
+        Cliente cliente2 = new Cliente("Cliente 2", "222");
 
         assertThrows(SillaOcupadaException.class, () -> venta1.vender(cliente2, concierto1, localidad1, silla(0)));
         assertEquals(1, venta1.getBoletas().size());
@@ -78,7 +78,7 @@ public class VentaServicioTest {
         for (int i = 0; i < 4; i++) {
             venta1.vender(cliente1, concierto1, localidad1, silla(i));
         }
-        Cliente mismoDocumento = new Cliente("Ana Maria", "111");
+        Cliente mismoDocumento = new Cliente("Cliente 3", "111");
 
         assertThrows(LimiteBoletasException.class, () -> venta1.vender(mismoDocumento, concierto1, localidad1, silla(4)));
     }

@@ -30,13 +30,13 @@ public class UtilidadesTest {
 
     @Test
     public void ordenarEventosLosDejaPorFecha() {
-        Partido partido1 = new Partido("Clasico", LocalDateTime.now().plusDays(5), new Escenario("A"), false, 0, "A vs B");
-        Concierto concierto1 = new Concierto("Rock", LocalDateTime.now().plusDays(1), new Escenario("B"), false, 0, "Banda");
+        Partido partido1 = new Partido("Partido de Futbol", LocalDateTime.now().plusDays(5), new Escenario("Estadio"), false, 0, "Equipo A vs Equipo B");
+        Concierto concierto1 = new Concierto("Concierto de Rock", LocalDateTime.now().plusDays(1), new Escenario("Parque"), false, 0, "Banda");
         List<Evento> eventos = new ArrayList<>(List.of(partido1, concierto1));
 
         Utilidades.ordenar(eventos);
 
-        assertEquals("Rock", eventos.get(0).getNombre());
+        assertEquals("Concierto de Rock", eventos.get(0).getNombre());
     }
 
     @Test

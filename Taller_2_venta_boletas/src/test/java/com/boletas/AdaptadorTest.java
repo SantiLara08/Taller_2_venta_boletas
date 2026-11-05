@@ -13,7 +13,7 @@ public class AdaptadorTest {
 
     @BeforeEach
     public void preparar() {
-        cliente = new Cliente("Andres", "123456");
+        cliente = new Cliente("Cliente 1", "111");
         adaptadorA = new AdaptadorA(new ProveedorA());
         adaptadorB = new AdaptadorB(new ProveedorB());
     }

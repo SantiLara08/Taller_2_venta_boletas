@@ -27,7 +27,7 @@ public class ContenedorTest {
         localidad2 = new Localidad("General", 50);
         localidad2.agregar(silla3);
 
-        zona1 = new Zona("Oriental");
+        zona1 = new Zona("Zona 1");
         zona1.agregar(localidad1);
         zona1.agregar(localidad2);
 
@@ -73,7 +73,7 @@ public class ContenedorTest {
 
     @Test
     public void contenedorVacioRespondeCero() {
-        Zona zona2 = new Zona("Vacia");
+        Zona zona2 = new Zona("Zona 2");
 
         assertEquals(0, zona2.capacidad());
         assertEquals(0, zona2.ingresos());
